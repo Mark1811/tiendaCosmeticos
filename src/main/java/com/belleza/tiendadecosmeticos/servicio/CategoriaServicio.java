@@ -13,7 +13,7 @@ public interface CategoriaServicio {
 
     ResponseEntity<Categoria>  guardarCategorias(Categoria categoria);
 
-    ResponseEntity<Producto> eliminarCategoria(Long id);
+    ResponseEntity<Categoria> eliminarCategoria(Long id);
 
     ResponseEntity<Collection<Producto>> listarProductoPorCategoria(Long id);
 

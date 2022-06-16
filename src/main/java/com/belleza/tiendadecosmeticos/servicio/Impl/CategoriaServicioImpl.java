@@ -50,7 +50,7 @@ public class CategoriaServicioImpl implements CategoriaServicio {
     }
 
     @Override
-    public ResponseEntity<Producto> eliminarCategoria(Long id) {
+    public ResponseEntity<Categoria> eliminarCategoria(Long id) {
         try {
             categoriaRepositorio.deleteById(id);
         }catch (Exception e){
