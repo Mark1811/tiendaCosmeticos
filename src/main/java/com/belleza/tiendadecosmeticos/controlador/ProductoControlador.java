@@ -1,5 +1,6 @@
 package com.belleza.tiendadecosmeticos.controlador;
 
+import com.belleza.tiendadecosmeticos.dto.ProductoDto;
 import com.belleza.tiendadecosmeticos.modelo.Producto;
 import com.belleza.tiendadecosmeticos.servicio.Impl.ProductoServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ProductoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Producto> guardarProductos(@RequestBody Producto producto){
-        return productoServicio.guardarProducto(producto);
+    public ResponseEntity<Producto> guardarProductos(@RequestBody ProductoDto productoDto){
+        return productoServicio.guardarProducto(productoDto);
     }
 
     @PutMapping("/{id}")

@@ -19,7 +19,7 @@ public class Categoria {
 
     @OneToMany
     @JsonBackReference
-    @JoinTable(name = "productos_categorias", joinColumns = @JoinColumn(name = "categoria_id",
+    @JoinTable(name = "ProductosCategorias", joinColumns = @JoinColumn(name = "categoria_id",
     referencedColumnName = "categoria_id"), inverseJoinColumns = @JoinColumn(name = "producto_id",
     referencedColumnName = "producto_id" ))
     private Set<Producto> productos = new HashSet<>();

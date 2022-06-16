@@ -1,6 +1,9 @@
 package com.belleza.tiendadecosmeticos.servicio.Impl;
 
+import com.belleza.tiendadecosmeticos.dto.ProductoDto;
 import com.belleza.tiendadecosmeticos.modelo.Producto;
+import com.belleza.tiendadecosmeticos.modelo.ProductosCategorias;
+import com.belleza.tiendadecosmeticos.repositorio.ProductosCategoriasRepositorio;
 import com.belleza.tiendadecosmeticos.repositorio.ProductosRepositorio;
 import com.belleza.tiendadecosmeticos.servicio.ProductoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Autowired
     private ProductosRepositorio productosRepositorio;
 
+    @Autowired
+    private ProductosCategoriasRepositorio productosCategoriasRepositorio;
+    
     @Override
     public ResponseEntity<List<Producto>> listarProductos() {
         try {
@@ -32,14 +38,27 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public ResponseEntity<Producto> guardarProducto(Producto producto) {
+    public ResponseEntity<Producto> guardarProducto(ProductoDto productoDto) {
         try {
+            Producto producto = new Producto();
+                    producto.setNombre(productoDto.getNombre());
+                    producto.setPrecio(productoDto.getPrecio());
+                    producto.setCantidad(productoDto.getCantidad());
+                    producto.setColor(productoDto.getColor());
             Producto nuevoProducto = productosRepositorio.save(producto);
-            if (nuevoProducto == null){
+
+            ProductosCategorias productosCategorias = new ProductosCategorias();
+                    productosCategorias.setProducto_id(producto.getId());
+                    productosCategorias.setCategoria_id(productoDto.getCategoriaId());
+            ProductosCategorias nuevaRelacion = productosCategoriasRepositorio.save(productosCategorias);
+
+
+            if (nuevoProducto == null && nuevaRelacion == null){
                 return ResponseEntity.notFound().build();
             }else{
                 return ResponseEntity.ok(producto);
             }
+            
         }catch (Exception e){
             System.out.println(e);
         }
