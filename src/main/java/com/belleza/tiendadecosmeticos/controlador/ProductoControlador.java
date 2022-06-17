@@ -28,7 +28,7 @@ public class ProductoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Producto> guardarProductos(@RequestBody ProductoDto productoDto){
+    public ResponseEntity<ProductoDto> guardarProductos(@RequestBody ProductoDto productoDto){
         return productoServicio.guardarProducto(productoDto);
     }
 

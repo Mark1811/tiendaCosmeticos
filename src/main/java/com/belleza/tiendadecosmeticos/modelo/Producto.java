@@ -1,6 +1,5 @@
 package com.belleza.tiendadecosmeticos.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;

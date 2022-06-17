@@ -21,7 +21,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Autowired
     private ProductosCategoriasRepositorio productosCategoriasRepositorio;
-    
+
     @Override
     public ResponseEntity<List<Producto>> listarProductos() {
         try {
@@ -38,27 +38,26 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public ResponseEntity<Producto> guardarProducto(ProductoDto productoDto) {
+    public ResponseEntity<ProductoDto> guardarProducto(ProductoDto productoDto) {
         try {
-            Producto producto = new Producto();
-                    producto.setNombre(productoDto.getNombre());
-                    producto.setPrecio(productoDto.getPrecio());
-                    producto.setCantidad(productoDto.getCantidad());
-                    producto.setColor(productoDto.getColor());
-            Producto nuevoProducto = productosRepositorio.save(producto);
+            if (productoDto != null){
+                Producto producto = new Producto();
+                producto.setNombre(productoDto.getNombre());
+                producto.setPrecio(productoDto.getPrecio());
+                producto.setCantidad(productoDto.getCantidad());
+                producto.setColor(productoDto.getColor());
+                Producto nuevoProducto = productosRepositorio.save(producto);
 
-            ProductosCategorias productosCategorias = new ProductosCategorias();
-                    productosCategorias.setProducto_id(producto.getId());
-                    productosCategorias.setCategoria_id(productoDto.getCategoriaId());
-            ProductosCategorias nuevaRelacion = productosCategoriasRepositorio.save(productosCategorias);
+                ProductosCategorias productosCategorias = new ProductosCategorias();
+                productosCategorias.setCategoria_id(productoDto.getCategoriaId());
+                productosCategorias.setProducto_id(producto.getId());
+                ProductosCategorias nuevaRelacion = productosCategoriasRepositorio.save(productosCategorias);
 
+                return ResponseEntity.ok(productoDto);
 
-            if (nuevoProducto == null && nuevaRelacion == null){
+            }else {
                 return ResponseEntity.notFound().build();
-            }else{
-                return ResponseEntity.ok(producto);
             }
-            
         }catch (Exception e){
             System.out.println(e);
         }
@@ -70,6 +69,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public ResponseEntity<Producto> eliminarProducto(Long id) {
         try {
+            productosCategoriasRepositorio.deleteById(id);
             productosRepositorio.deleteById(id);
         }catch (Exception e){
             System.out.println(e);
@@ -100,6 +100,7 @@ public class ProductoServicioImpl implements ProductoServicio {
             producto.setNombre(producto.getNombre());
             producto.setPrecio(producto.getPrecio());
             producto.setCantidad(producto.getCantidad());
+            producto.setColor(producto.getColor());
             productosRepositorio.save(producto);
             return  new ResponseEntity<Producto>(HttpStatus.OK);
         }catch (Exception exception){
