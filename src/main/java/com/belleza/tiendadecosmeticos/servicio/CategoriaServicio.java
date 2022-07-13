@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface CategoriaServicio {
 
+    /*
+     * Creacion de metodos a utilizar, en esta interface no va la logica.
+     */
     ResponseEntity<List<Categoria>> listarCategorias();
 
     ResponseEntity<Categoria>  guardarCategorias(Categoria categoria);

@@ -11,6 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductoDto {
 
+    /*
+    * Un Dto, muy practicos para filtrar o evitar que informacion sensible
+    * quede visible.
+    * Este Dto lo utilizo para capturar diferente informacion, como las propiedades del
+    * productos y con que categoria se va a relacionar, para guardarla en 2 tablas distintas.
+    * */
+
     private  String nombre;
 
     private int precio;

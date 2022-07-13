@@ -15,6 +15,12 @@ import java.util.List;
 @Service
 public class CategoriaServicioImpl implements CategoriaServicio {
 
+    /*
+    * Creamos una clase para implementar nuestros metodos antes creados,
+    * le agregamos la etiqueta service y le decimos que este es un implementeacion de
+    * nuestra interfas anterior creada, este nos importara todos los metodos, y aqui es
+    * donde realizamos toda la logica.
+    * */
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 

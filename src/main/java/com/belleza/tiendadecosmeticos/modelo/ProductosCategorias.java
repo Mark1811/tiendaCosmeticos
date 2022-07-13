@@ -11,6 +11,8 @@ import javax.persistence.Id;
 @Entity
 public class ProductosCategorias {
 
+    //Esta es nuestra tabla que va a tener la relacion
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

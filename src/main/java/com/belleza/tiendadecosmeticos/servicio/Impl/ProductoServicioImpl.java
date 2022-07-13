@@ -31,7 +31,7 @@ public class ProductoServicioImpl implements ProductoServicio {
             }
             return ResponseEntity.ok(productos);
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("ERROR"+e);
         }
 
         return null;
@@ -96,11 +96,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public ResponseEntity<Producto> actualizarProducto(Producto producto, Long id) {
         try {
-            var productoExistente = productosRepositorio.findById(id);
-            producto.setNombre(producto.getNombre());
-            producto.setPrecio(producto.getPrecio());
-            producto.setCantidad(producto.getCantidad());
-            producto.setColor(producto.getColor());
+            Producto productoActual = productosRepositorio.findById(id).orElseThrow();
+            productoActual.setNombre(producto.getNombre());
+            productoActual.setPrecio(producto.getPrecio());
+            productoActual.setCantidad(producto.getCantidad());
+            productoActual.setColor(producto.getColor());
             productosRepositorio.save(producto);
             return  new ResponseEntity<Producto>(HttpStatus.OK);
         }catch (Exception exception){
