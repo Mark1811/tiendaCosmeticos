@@ -20,7 +20,8 @@ public class CategoriaControlador {
 
     @GetMapping
     public ResponseEntity<List<Categoria>> listarCategorias(){
-        return categoriaServicio.listarCategorias();
+
+        return  categoriaServicio.listarCategorias();
     }
 
     @PostMapping
